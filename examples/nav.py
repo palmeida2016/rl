@@ -81,7 +81,7 @@ class Piece:
 
 
 class Env:
-    def __init__(self, size = 8):
+    def __init__(self, size = 4):
         # Define grid size
         self.size = size
 
@@ -94,8 +94,36 @@ class Env:
             'police' : 'P',
             'thief' : 'T',
             'gold' : 'G'}
+        
+        # Define constants for training
+        self.episodes = 20000
+        self.epsilon = 0.9
+        self.learning_rate = 0.1
+        self.discount = 0.95
 
-    def initializePositions(self, nPolice = 3, nThief = 1, nGold = 1):
+        # Define penalties
+        self.move_reward = -1
+        self.police_reward = -50
+        self.gold_reward = 50
+
+        # Define q-table dictionary for learning
+        self.q_table = self.initializeQTable()
+
+    def initializeQTable(self):
+        q_table = {}
+
+
+        return q_table
+
+    def train(self):
+        
+
+
+    def initializePositions(self, nPolice = 1, nThief = 1, nGold = 1):
+        self.nPolice = nPolice
+        self.nThief = nThief
+        self.nGold = nGold
+
         def populate(self, n, name):
             for _ in range(n):
                 # Generate Random Pos for Object
@@ -123,7 +151,6 @@ class Env:
         # Return distance to each object
         return [thief-piece for piece in self.pieces if piece.name != 'thief']
         
-
     def display(self):
         '''
         Display current configuration of the grid
@@ -143,6 +170,10 @@ class Env:
                     print(self.key.get('empty'), end='')
             print('|')
         print((2*self.size+1)*'-')
+
+    def train(self):
+        pass
+
 
 if __name__ == '__main__':
     env = Env()

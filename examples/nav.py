@@ -1,6 +1,8 @@
 import numpy as np
 import time
 
+# https://pythonprogramming.net/own-environment-q-learning-reinforcement-learning-python-tutorial/
+
 class Piece:
 	def __init__(self, name, x, y, size):
 		'''

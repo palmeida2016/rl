@@ -1,19 +1,17 @@
-def convert(base,n):
-    temp = n
-    octal = 0
-    ctr = 0
+import numpy as np
+import time
 
-    while temp > 0:
-        octal += (temp%base) * (10**ctr)
-        temp = temp//base
-        ctr += 1
+size = 4
+nPolice = 1
+nThief = 1
+nGold = 1
 
-    return octal
+mySize = [4]
+mySize *= 2*(nPolice+nThief+nGold)
+
+a = np.random.rand(2,2)
+print(a)
 
 
-base = 4
-
-for i in range(base**2):
-    x = convert(base,i)
- 
-    print([int(a) for a in str(x)])
+a = a*(2*size) - size
+print(a)

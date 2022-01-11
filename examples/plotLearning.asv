@@ -1,0 +1,5 @@
+data = table2array(readtable('test.csv'));
+movingMean = movmean(data(:,2), [1 10000]);
+coeff = polyfit(data(1,:),data(:,2),1);
+y = polyval(coeff, data(:,1))
+plot(movingMean);

@@ -1,0 +1,86 @@
+\documentclass{jfm}
+\usepackage{graphicx}
+\usepackage{epstopdf, epsfig}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\shorttitle{Short Title}
+\shortauthor{Short Author}
+
+\title{Title}
+
+\author{Pedro Almeida\aff{1},
+  Siddhartha Verma \aff{1,2} \corresp{\email{vermas@fau.edu}}}
+
+\affiliation{\aff{1}Department of Ocean and Mechanical Engineering, Florida Atlantic University, Boca Raton, FL 33431, USA
+\aff{2}Harbor Branch Oceanographic Institute, Florida Atlantic University, Fort Pierce, FL 34946, USA}
+
+\begin{document}
+
+\maketitle
+
+%------------------------------------------------------------------------------------------------------------------
+% ABSTRACT
+%------------------------------------------------------------------------------------------------------------------
+\begin{abstract}
+Test
+\end{abstract}
+
+
+%------------------------------------------------------------------------------------------------------------------
+% KEY WORDS
+%------------------------------------------------------------------------------------------------------------------
+\begin{keywords}
+Authors should not enter keywords on the manuscript, as these must be chosen by the author during the online submission process and will then be added during the typesetting process (see http://journals.cambridge.org/data/\linebreak[3]relatedlink/jfm-\linebreak[3]keywords.pdf for the full list)
+\end{keywords}
+
+
+%------------------------------------------------------------------------------------------------------------------
+% Introduction
+%------------------------------------------------------------------------------------------------------------------
+\section{Introduction}
+Reinforcement Learning (RL) is the area of machine learning whereby an agent learns optimal behavior through repeated interactions with an environment that maximize some notion of a cumulative reward. 
+
+Why it differs from other methods.
+
+Some common applications (famous examples).
+
+Challenges in designing a system
+
+Introduction of basic concepts.
+
+%------------------------------------------------------------------------------------------------------------------
+% Methods
+%------------------------------------------------------------------------------------------------------------------
+\section{Methods}
+\subsection{Grid World}
+\subsection{Cartpole}
+\cite{Florian2007}
+
+\cite{1606.01540}
+
+\begin{equation}
+\ddot{\theta} = \frac{g sin(\theta) - cos(\theta) \left(\frac{-F - m_{p} L \dot{\theta}^2 sin(\theta)}{m_{t}}\right)}{L * \left[\frac{4}{3} - \frac{m_{p} cos^2(\theta)}{m_{t}}\right]}
+\end{equation}
+
+\begin{equation}
+\ddot{x} = \frac{F + m_{p}L\left(\dot{\theta}^2 sin(\theta) - \ddot{\theta} cos(\theta) \right)}{m_{t}}
+\end{equation}
+
+
+%------------------------------------------------------------------------------------------------------------------
+% Conclusions
+%------------------------------------------------------------------------------------------------------------------
+\section{Conclusions}
+
+
+%------------------------------------------------------------------------------------------------------------------
+% Bibliography
+%------------------------------------------------------------------------------------------------------------------
+\bibliographystyle{jfm}
+\bibliography{citations}
+
+
+\end{document}
+

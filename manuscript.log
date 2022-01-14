@@ -1,0 +1,251 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.13)  14 JAN 2022 13:06
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./manuscript.tex
+(manuscript.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2021-11-22> (jfm.cls
+Document Class: jfm 2007/03/13 v1.28 Journal of Fluid Mechanics document class
+(/usr/local/share/miktex-texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/share/miktex-texmf/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/local/share/miktex-texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/share/miktex-texmf/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/local/share/miktex-texmf/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/local/share/miktex-texmf/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen138
+\Gin@req@width=\dimen139
+)
+(/usr/local/share/miktex-texmf/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count183
+)
+LaTeX Info: Redefining \textsfbi on input line 184.
+LaTeX Font Info:    Redeclaring math alphabet \mathsfbi on input line 184.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfbi' in version `normal'
+(Font)                  OT1/cmss/m/sl --> T1/phv/b/it on input line 184.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfbi' in version `bold'
+(Font)                  OT1/cmss/m/sl --> T1/phv/b/it on input line 184.
+LaTeX Info: Redefining \textsfbi on input line 188.
+LaTeX Font Info:    Redeclaring math alphabet \mathsfbi on input line 188.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfbi' in version `normal'
+(Font)                  T1/phv/b/it --> OT1/phv/b/it on input line 188.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfbi' in version `bold'
+(Font)                  T1/phv/b/it --> OT1/phv/b/it on input line 188.
+\halflineskip=\skip47
+\affilskip=\skip48
+\c@part=\count184
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\@indentskip=\skip49
+\smallindent=\skip50
+\@footindent=\skip51
+\@leftskip=\skip52
+\proofbox=\box50
+\rpbdim=\skip53
+\@stequation=\toks17
+\c@subequation=\count189
+\c@table=\count190
+\c@figure=\count191
+LaTeX Info: Redefining \cite on input line 1157.
+\astrutbox=\box51
+
+
+Found the 'amsbsy' package on the system, using it.
+
+(/usr/local/share/miktex-texmf/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+
+(/usr/local/share/miktex-texmf/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen140
+)
+\pmbraise@=\dimen141
+)
+
+
+Found AMS Euler Roman fonts on the system, but you dont seem to have the
+'upmath' package installed. JFM.cls can take advantage of these fonts,
+if you use 'upmath' package.
+
+
+
+
+Found AMS Symbol fonts on the system, using the 'amssymb' package.
+
+(/usr/local/share/miktex-texmf/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/share/miktex-texmf/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)))
+(/usr/local/share/miktex-texmf/tex/latex/epstopdf-pkg/epstopdf.sty
+Package: epstopdf 2020-01-24 v2.11 Conversion with epstopdf on the fly (HO)
+
+(/home/palmeida/.miktex/texmfs/install/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/home/palmeida/.miktex/texmfs/install/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+
+(/home/palmeida/.miktex/texmfs/install/tex/generic/kvdefinekeys/kvdefinekeys.st
+y
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)) (/home/palmeida/.miktex/texmfs/install/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+
+(/home/palmeida/.miktex/texmfs/install/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/home/palmeida/.miktex/texmfs/install/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/local/share/miktex-texmf/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/share/miktex-texmf/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/share/miktex-texmf/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(/usr/local/share/miktex-texmf/tex/latex/00miktex/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+)))
+(/usr/local/share/miktex-texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
+\epsfxsize=\dimen142
+\epsfysize=\dimen143
+)
+\c@lemma=\count192
+\c@corollary=\count193
+
+(/home/palmeida/.miktex/texmfs/install/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip54
+\bibsep=\skip55
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count194
+)
+(/usr/local/share/miktex-texmf/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-12-14 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count195
+\l__pdf_internal_box=\box52
+)
+(manuscript.aux)
+\openout1 = `manuscript.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+
+(/usr/local/share/miktex-texmf/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count196
+\scratchdimen=\dimen144
+\scratchbox=\box53
+\nofMPsegments=\count197
+\nofMParguments=\count198
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count199
+\MPscratchDim=\dimen145
+\MPnumerator=\count266
+\makeMPintoPDFobject=\count267
+\everyMPtoPDFconversion=\toks20
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+
+ (/usr/local/share/miktex-texmf/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+
+
+(/usr/local/share/miktex-texmf/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (manuscript.bbl
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[1{/home/palmeida/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map}
+Non-PDF special ignored!
+<special> papersize=174mm,247mm
+]) [2] (manuscript.aux) ) 
+Here is how much of TeX's memory you used:
+ 3565 strings out of 478660
+ 53627 string characters out of 2853013
+ 349212 words of memory out of 3000000
+ 21626 multiletter control sequences out of 15000+600000
+ 414480 words of font info for 69 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 70i,10n,76p,314b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/share/miktex-texmf/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/c
+m/cmbx12.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmbx
+8.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local
+/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/share/
+miktex-texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/share/miktex-
+texmf/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/share/miktex-texmf/f
+onts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/share/miktex-texmf/fonts/typ
+e1/public/amsfonts/cm/cmr6.pfb></usr/local/share/miktex-texmf/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr
+/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local
+/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/share/
+miktex-texmf/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on manuscript.pdf (2 pages, 225448 bytes).
+PDF statistics:
+ 104 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

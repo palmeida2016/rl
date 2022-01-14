@@ -1,0 +1,17 @@
+\begin{thebibliography}{2}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\def\au#1{#1} \def\ed#1{#1} \def\yr#1{#1}\def\at#1{#1}\def\jt#1{\textit{#1}}
+  \def\bt#1{#1}\def\bvol#1{\textbf{#1}} \def\vol#1{#1} \def\pg#1{#1}
+  \def\publ#1{#1}\def\arxiv#1{#1}\def\org#1{#1}\def\st#1{\textit{#1}}
+
+\bibitem[Brockman {\em et~al.\/}(2016)Brockman, Cheung, Pettersson, Schneider,
+  Schulman, Tang \& Zaremba]{1606.01540}
+{\sc \au{Brockman, Greg}, \au{Cheung, Vicki}, \au{Pettersson, Ludwig},
+  \au{Schneider, Jonas}, \au{Schulman, John}, \au{Tang, Jie} \& \au{Zaremba,
+  Wojciech}} \yr{2016} Openai gym,  \arxiv{arXiv: arXiv:1606.01540}.
+
+\bibitem[Studies(2007)]{Florian2007}
+{\sc \au{Studies, Neural}} \yr{2007}  \at{{Correct equations for the dynamics
+  of the cart-pole system}}.  \jt{Romania}  \pg{pp. 1--6}.
+
+\end{thebibliography}

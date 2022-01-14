@@ -1,6 +1,4 @@
 import numpy as np
-import time
-import pandas
 
 class Piece:
     def __init__(self, name, x, y, size):
@@ -100,32 +98,38 @@ class Env:
             'gold' : 'G'}
         
         # Define constants for training
-        self.episodes = 100000
-        self.episode_length = 200
-        self.epsilon = 0.95
+        self.episodes = 10000 # Number of simulations to be ran
+        self.episode_length = 100 # Maximum number of actions in each episode
+        self.epsilon = 0.95 # Percent chance of object to explore vs. exploit
         self.learning_rate = 0.1
         self.discount = 0.9
-        self.decay = 0.99998
+        self.decay = 0.9998 # Rate by which to decrease epsilon
 
         # Save rewards over episodes
         self.rewards = []
 
         # Define penalties
-        self.move_reward = -2
-        self.police_reward = -200
-        self.gold_reward = 100
-        self.endless_reward = -500
+        self.move_reward = -2 # Move costs 2. Encourage optimal pathing
+        self.police_reward = -200 # Negative reward for obstacle
+        self.gold_reward = 100 # Positive reward for goal
+        self.endless_reward = -500 # Negative reward for not reaching goal by the end
+        
+        # Define filename to store q_table
+        self.filename = 'q_table.npy'
 
         # Define q-table dictionary for learning
         self.q_table = self.initializeQTable()
 
+        
     def initializeQTable(self):
         '''
         Creates Q-Table to keep track of optimal moves initially randomized
         '''
 
         # Check if saved q_table already exists
-
+        temp = self.load(self.filename)
+        if temp is not False:
+            return temp
 
         # Calculate required size for q_table
         size = [self.size] * 2 * (self.nPolice+self.nGold)
@@ -134,7 +138,6 @@ class Env:
         # Create q_table with required size
         q_table = np.random.rand(*size)
         q_table = q_table * -self.moves
-        # q_table = q_table * (2*self.size) - self.size
 
         return q_table
 
@@ -207,27 +210,44 @@ class Env:
                     q_new = self.gold_reward
                 else:
                     q_new = (1-self.learning_rate) * q_current + self.learning_rate * (reward + self.discount * q_future_max)
-
+                
+                # Update the q_table with new observation
                 self.q_table[obs][action] = q_new
                 
+                # Add reward for current step to total episode reward
                 episode_reward += reward
 
-                if reward == self.gold_reward:
+                if reward == self.gold_reward: # If thief hit police, end the episode
                     print('G')
                     break
-                elif reward == self.police_reward:
+                elif reward == self.police_reward: # If thief hit gold, end the episode
                     print('P')
                     break
 
-                if step == self.episode_length-1:
+                if step == self.episode_length-1: # If thief is on last move, add negative reward for not finishing
                     reward = self.endless_reward
                     break
             
+            # Keep track of rewards each episode
             self.rewards.append(episode_reward)
+ 
+            # Lower epsilon (threshold for using q_table) exponentially as learning goes on
             self.epsilon *= self.decay
 
-    def save(self):
-        pass
+        self.save(self.filename)
+
+    def save(self, filename):
+        np.save(filename, self.q_table)
+
+    def load(self,filename):
+        from os.path import exists
+
+        # If filename doesn't exist, return false
+        if not exists(filename):
+            return False
+        
+        # If filename exists, load it
+        return np.load(filename)
 
     def initializePositions(self, nPolice = 1, nThief = 1, nGold = 1):
         '''

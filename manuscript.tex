@@ -40,9 +40,9 @@ Authors should not enter keywords on the manuscript, as these must be chosen by 
 % Introduction
 %------------------------------------------------------------------------------------------------------------------
 \section{Introduction}
-Reinforcement Learning (RL) is the area of machine learning whereby an agent learns optimal behavior through repeated interactions with an environment that maximize some notion of a cumulative reward. 
+Reinforcement Learning (RL) is an area of machine learning where an agent learns optimal behavior through repeated interactions with an environment that maximize some notion of a cumulative reward. 
 
-Why it differs from other methods.
+Why it differs from other methods of machine learning
 
 Some common applications (famous examples).
 
@@ -50,12 +50,47 @@ Challenges in designing a system
 
 Introduction of basic concepts.
 
+Markov decision process (MDP): 
+
 %------------------------------------------------------------------------------------------------------------------
 % Methods
 %------------------------------------------------------------------------------------------------------------------
 \section{Methods}
-\subsection{Grid World}
-\subsection{Cartpole}
+\subsection{Q-Learning}
+\subsubsection{Theory of Q-Learning}
+Q-Learning is a model-free RL algorithm whereby an agent learns the value of an action for a given state  by calculating the expected reward for an action taken in a given state. Originally proposed by Watkins in 1989 \cite{Watkins1989},
+
+- Works well for discretized environements (like grids)
+
+- Can work with continuous with binning
+
+- Becomes more difficult when size of problem increases (space and time complexity explode)
+
+- Exploring all states in q-learning often takes too long
+
+\subsubsection{Grid World}
+- Grid like 8x8
+
+- One thief (seeking)
+
+- Police Officer (Obstacle)
+
+- Gold (Goal)
+
+
+
+\begin{equation}
+Q^{new}(s_t,a_t) = Q(s_t,a_t) + \alpha \left(r_t +  \gamma Q(s_{t+1},a) - Q(s_t,a_t)\right)
+\end{equation}
+
+
+\subsection{Deep Q-Learning}
+\subsubsection{Deep Q-Learning Theory}
+A bit better for continuous state domains
+
+
+
+\subsubsection{Environment}
 \cite{Florian2007}
 
 \cite{1606.01540}
@@ -67,6 +102,7 @@ Introduction of basic concepts.
 \begin{equation}
 \ddot{x} = \frac{F + m_{p}L\left(\dot{\theta}^2 sin(\theta) - \ddot{\theta} cos(\theta) \right)}{m_{t}}
 \end{equation}
+
 
 
 %------------------------------------------------------------------------------------------------------------------

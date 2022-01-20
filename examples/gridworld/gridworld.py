@@ -78,7 +78,7 @@ class Piece:
 
 
 class Env:
-    def __init__(self, size = 4, nPolice = 1, nThief = 1, nGold = 1):
+    def __init__(self, size = 8, nPolice = 2, nThief = 1, nGold = 1):
         # Define grid size
         self.size = size
 
@@ -98,21 +98,22 @@ class Env:
             'gold' : 'G'}
         
         # Define constants for training
-        self.episodes = 10000 # Number of simulations to be ran
+        self.episodes = 1000000 # Number of simulations to be ran
         self.episode_length = 100 # Maximum number of actions in each episode
-        self.epsilon = 0.95 # Percent chance of object to explore vs. exploit
-        self.learning_rate = 0.1
+        self.epsilon = 0.99 # Percent chance of object to explore vs. exploit
+        self.epsilon_min = 0.05 # Min epsilon to not drop below
+        self.learning_rate = 0.3
         self.discount = 0.9
-        self.decay = 0.9998 # Rate by which to decrease epsilon
+        self.decay = 0.9999 # Rate by which to decrease epsilon
 
         # Save rewards over episodes
         self.rewards = []
 
         # Define penalties
-        self.move_reward = -2 # Move costs 2. Encourage optimal pathing
-        self.police_reward = -200 # Negative reward for obstacle
-        self.gold_reward = 100 # Positive reward for goal
-        self.endless_reward = -500 # Negative reward for not reaching goal by the end
+        self.move_reward = -1 # Move costs 2. Encourage optimal pathing
+        self.police_reward = -100 # Negative reward for obstacle
+        self.gold_reward = 50 # Positive reward for goal
+        self.endless_reward = -200 # Negative reward for not reaching goal by the end
         
         # Define filename to store q_table
         self.filename = 'q_table.npy'
@@ -233,6 +234,9 @@ class Env:
  
             # Lower epsilon (threshold for using q_table) exponentially as learning goes on
             self.epsilon *= self.decay
+            
+            if self.epsilon < self.epsilon_min:
+                self.epsilon = self.epsilon_min
 
         self.save(self.filename)
 

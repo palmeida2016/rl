@@ -6,44 +6,44 @@ The style file: jfm.bst
 Reallocating 'name_of_file' (item size: 1) to 10 items.
 Database file #1: citations.bib
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
-You've used 2 entries,
+You've used 3 entries,
             3068 wiz_defined-function locations,
-            692 strings with 5447 characters,
-and the built_in function-call counts, 1128 in all, are:
-= -- 91
-> -- 68
-< -- 2
-+ -- 26
-- -- 24
-* -- 117
-:= -- 197
-add.period$ -- 3
-call.type$ -- 2
-change.case$ -- 18
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 58
-empty$ -- 76
-format.name$ -- 26
-if$ -- 213
+            697 strings with 5542 characters,
+and the built_in function-call counts, 1438 in all, are:
+= -- 120
+> -- 78
+< -- 3
++ -- 30
+- -- 27
+* -- 139
+:= -- 256
+add.period$ -- 4
+call.type$ -- 3
+change.case$ -- 24
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 77
+empty$ -- 101
+format.name$ -- 30
+if$ -- 272
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 1
-newline$ -- 11
-num.names$ -- 8
-pop$ -- 20
+newline$ -- 14
+num.names$ -- 12
+pop$ -- 26
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 21
 quote$ -- 0
-skip$ -- 30
+skip$ -- 41
 stack$ -- 0
-substring$ -- 38
-swap$ -- 24
+substring$ -- 49
+swap$ -- 28
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 18
+type$ -- 27
 warning$ -- 0
-while$ -- 9
+while$ -- 12
 width$ -- 0
-write$ -- 24
+write$ -- 33

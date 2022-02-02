@@ -1,6 +1,6 @@
 import numpy as np
 
-class Cartpole:
+class CartpoleEnv:
     def __init__(self):
         # Define Constants for Objects
         self.cart_mass = 1
@@ -74,10 +74,12 @@ class Cartpole:
         return self.state
 
 def createAgent():
-    pass
+    from ann import ArticifialNeuralNetwork
+    self.model = ArtificialNeuralNetwork()
 
 def main():
-    env = Cartpole()
+    env = CartpoleEnv()
+    env.createAgent()
     env.reset()
     for i in range(1000):
         state, reward, done = env.step(round(np.random.random()))

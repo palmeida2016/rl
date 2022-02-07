@@ -1,7 +1,19 @@
+# Import numpy to store and manage q_table
 import numpy as np
+
+# Import time to record duration of algorithm
 import time
 
+
 class Piece:
+    '''
+    Class to manage single piece on the board
+
+    Name - Identifier for the type of piece (e.g. police, thief, gold)
+    x - X coordinate of the piece on the board
+    y - Y coordinate of the piece on the board
+    size - Grid size
+    '''
     # Key to map movements to delta X and delta Y
     key = {
     0: [1, 0],
@@ -12,7 +24,7 @@ class Piece:
 
     def __init__(self, name, x, y, size):
         '''
-        Initialize Piece with its position
+        Initialize Piece with its name, position, and size of grid
         '''
         # Define key properties for piece
         self.name = name
@@ -22,7 +34,7 @@ class Piece:
         
     def __repr__(self):
         '''
-        Function to print() object
+        Function to repr() object
         '''
         return f'({self.x},{self.y})'
 
@@ -34,7 +46,7 @@ class Piece:
 
     def __sub__(self, otherPiece):
         '''
-        Method to get difference in position of 2 pieces
+        Method to get the difference in x and y position between two pieces
         '''
         # Check if objects both are pieces
         assert(type(otherPiece) == type(self))
@@ -44,7 +56,7 @@ class Piece:
 
     def __eq__(self, otherPiece):
         '''
-        Method to check if two pieces are in same pos
+        Method to check if two pieces are in the same square
         '''
         # Check if objects both are pieces
         assert(type(otherPiece) == type(self))
@@ -55,17 +67,16 @@ class Piece:
 
     def move(self, action):
         '''
-        Update position of piece with delta x values
+        Method to move the piece given an action
         '''
-        # Convert from action to delta values
+        # Lookup delta x and delta y values from action dictionary
         (deltaX, deltaY) = Piece.key.get(action)
 
-        
         # Check if move is possible
-        if self.x+deltaX < 0 or self.x+deltaX > self.size-1:
+        if self.x+deltaX < 0 or self.x+deltaX > self.size-1: # If the piece's x-coordinate will be out of bounds
             deltaX = 0
 
-        if self.y+deltaY < 0 or self.y+deltaY > self.size-1:
+        if self.y+deltaY < 0 or self.y+deltaY > self.size-1: # If the piece's y-coordinate will be out of bounds
             deltaY = 0
         
         # Update positions of piece with movement
@@ -74,12 +85,20 @@ class Piece:
 
     def getPos(self):
         '''
-        Return the position of piece as ordered pair
+        Return the position of piece as an ordered pair
         '''
         return (self.x,self.y)
 
 
 class Env:
+    '''
+    Main class to store environment where agent will interact
+
+    size - Grid size
+    nPolice - Number of 'police' pieces in gridworld
+    nThief - Number of 'thief' pieces in gridworld (must be one)
+    nGold - Number of 'gold' pieces in gridworld
+    '''
     def __init__(self, size = 5, nPolice = 2, nThief = 1, nGold = 1):
         # Define grid size
         self.size = size
@@ -106,23 +125,23 @@ class Env:
         self.staticStartingThief = True
 
         # Define constants for training
-        self.episodes = 100000 # Number of simulations to be ran
-        self.episode_length = 50 # Maximum number of actions in each episode
-        self.epsilon_start = 0.95 # Initial epsilon
-        self.epsilon = self.epsilon_start # Percent chance of object to explore vs. exploit
-        self.epsilon_min = 0.05 # Min epsilon to not drop below
-        self.learning_rate = 0.3
-        self.discount = 0.9
-        self.decay = 0.9999 # Rate by which to decrease epsilon
+        self.episodes = 100000              # Number of simulations to be ran
+        self.episode_length = 50            # Maximum number of actions in each episode
+        self.epsilon = 0.95                 # Percent chance of object to explore vs. exploit
+        self.epsilon_start = self.epsilon   # Initial epsilon
+        self.epsilon_min = 0.05             # Min epsilon to not drop below
+        self.learning_rate = 0.3            # Multiplier by which q_table values are changed
+        self.discount = 0.9                 # How much future experiences affect current Q-score
+        self.decay = 0.9999                 # Rate by which to decrease epsilon
 
         # Save rewards over episodes
         self.rewards = []
 
-        # Define penalties
-        self.move_reward = -1 # Move costs 1. Encourage optimal pathing
-        self.police_reward = -100 # Negative reward for obstacle
-        self.gold_reward = 50 # Positive reward for goal
-        self.endless_reward = 0 # Negative reward for not reaching goal by the end
+        # Define reward function for given states
+        self.move_reward = -1               # Each move 
+        self.police_reward = -100           # Negative reward for obstacle
+        self.gold_reward = 50               # Positive reward for goal
+        self.endless_reward = 0             # Negative reward for not reaching goal by the end
         
         # Define filename to store q_tablie
         self.filename = 'q_table.npy'
@@ -154,26 +173,25 @@ class Env:
         '''
         Main script to keep train agent by modifying Q-Table
         '''
-        if self.staticStartingLayout:
-            import copy
+        if self.staticStartingLayout: # If training with static environment, define environment here
+            # Initialize positions
             self.initializePositions()
-            self.default = copy.deepcopy(self.pieces)
-
+                    
+        # Iterate through all training episodes
         for episode in range(self.episodes):
-            # If using same grid, use stored grid for training, otherwise, generate new grid every time
-            if self.staticStartingLayout: #and not episode in range(0,self.episodes,5000):
+            if self.staticStartingLayout: # If using static environment
+                # Reset to starting environment
                 self.resetToDefault()
-                # If thief is to be randomized
-                if self.staticStartingThief:
+
+                if self.staticStartingThief: # If thief starting position is to be randomized
+                    # Place the thief in a random position
                     self.randomPlaceThief()
-            else:
-                print('restarting board')
-                self.epsilon = self.epsilon_start
+
+            else: # Reset the the board every episode
                 self.initializePositions()
-                self.default = copy.deepcopy(self.pieces)
 
 
-            # Print current episode
+            # Print current episode for debugging
             print(episode)
 
             # Initialize episode reward
@@ -379,6 +397,10 @@ class Env:
         populate(self, self.nThief, 'thief')
         populate(self, self.nGold, 'gold')
         populate(self, self.nPolice, 'police')
+        
+        # Save environment configuration to self.default with deep copy
+        import copy
+        self.default = copy.deepcopy(self.pieces)
 
     def resetToDefault(self):
         import copy

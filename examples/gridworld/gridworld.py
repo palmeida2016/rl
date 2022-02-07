@@ -1,6 +1,15 @@
 import numpy as np
+import time
 
 class Piece:
+    # Key to map movements to delta X and delta Y
+    key = {
+    0: [1, 0],
+    1: [-1, 0],
+    2: [0, 1],
+    3: [0, -1],
+    }
+
     def __init__(self, name, x, y, size):
         '''
         Initialize Piece with its position
@@ -11,14 +20,6 @@ class Piece:
         self.y = y
         self.size = size
         
-        # Key to map movements to delta X and delta Y
-        self.key = {
-        0: [1, 0],
-        1: [-1, 0],
-        2: [0, 1],
-        3: [0, -1],
-        }
-
     def __repr__(self):
         '''
         Function to print() object
@@ -57,7 +58,8 @@ class Piece:
         Update position of piece with delta x values
         '''
         # Convert from action to delta values
-        (deltaX, deltaY) = self.key.get(action)
+        (deltaX, deltaY) = Piece.key.get(action)
+
         
         # Check if move is possible
         if self.x+deltaX < 0 or self.x+deltaX > self.size-1:
@@ -78,7 +80,7 @@ class Piece:
 
 
 class Env:
-    def __init__(self, size = 8, nPolice = 2, nThief = 1, nGold = 1):
+    def __init__(self, size = 5, nPolice = 2, nThief = 1, nGold = 1):
         # Define grid size
         self.size = size
 
@@ -96,11 +98,18 @@ class Env:
             'police' : 'P',
             'thief' : 'T',
             'gold' : 'G'}
-        
+
+        # Option to keep grid same
+        self.staticStartingLayout = True
+
+        # Option to change starting position of thief every episode
+        self.staticStartingThief = True
+
         # Define constants for training
-        self.episodes = 1000000 # Number of simulations to be ran
-        self.episode_length = 100 # Maximum number of actions in each episode
-        self.epsilon = 0.99 # Percent chance of object to explore vs. exploit
+        self.episodes = 100000 # Number of simulations to be ran
+        self.episode_length = 50 # Maximum number of actions in each episode
+        self.epsilon_start = 0.95 # Initial epsilon
+        self.epsilon = self.epsilon_start # Percent chance of object to explore vs. exploit
         self.epsilon_min = 0.05 # Min epsilon to not drop below
         self.learning_rate = 0.3
         self.discount = 0.9
@@ -110,12 +119,12 @@ class Env:
         self.rewards = []
 
         # Define penalties
-        self.move_reward = -1 # Move costs 2. Encourage optimal pathing
+        self.move_reward = -1 # Move costs 1. Encourage optimal pathing
         self.police_reward = -100 # Negative reward for obstacle
         self.gold_reward = 50 # Positive reward for goal
-        self.endless_reward = -200 # Negative reward for not reaching goal by the end
+        self.endless_reward = 0 # Negative reward for not reaching goal by the end
         
-        # Define filename to store q_table
+        # Define filename to store q_tablie
         self.filename = 'q_table.npy'
 
         # Define q-table dictionary for learning
@@ -126,7 +135,6 @@ class Env:
         '''
         Creates Q-Table to keep track of optimal moves initially randomized
         '''
-
         # Check if saved q_table already exists
         temp = self.load(self.filename)
         if temp is not False:
@@ -146,11 +154,26 @@ class Env:
         '''
         Main script to keep train agent by modifying Q-Table
         '''
-        for episode in range(self.episodes):
-            # Intialize random board configuration
+        if self.staticStartingLayout:
+            import copy
             self.initializePositions()
-            
-            # Debugging
+            self.default = copy.deepcopy(self.pieces)
+
+        for episode in range(self.episodes):
+            # If using same grid, use stored grid for training, otherwise, generate new grid every time
+            if self.staticStartingLayout: #and not episode in range(0,self.episodes,5000):
+                self.resetToDefault()
+                # If thief is to be randomized
+                if self.staticStartingThief:
+                    self.randomPlaceThief()
+            else:
+                print('restarting board')
+                self.epsilon = self.epsilon_start
+                self.initializePositions()
+                self.default = copy.deepcopy(self.pieces)
+
+
+            # Print current episode
             print(episode)
 
             # Initialize episode reward
@@ -166,6 +189,12 @@ class Env:
             gold = [piece for piece in self.pieces if piece.name == 'gold']
 
             for step in range(self.episode_length):
+                # Print Episode
+                if episode in range(0,self.episodes,10000):
+                    self.display()
+                    time.sleep(1)
+
+
                 # Get Observation as distance between police and gold to thief
                 observation = self.getDistanceThief()
                 
@@ -240,6 +269,77 @@ class Env:
 
         self.save(self.filename)
 
+    def test(self):
+        # Test with n starting conditions
+        n = 5
+        for _ in range(n):
+            # Load trained q_table
+            self.q_table = self.load(self.filename)
+
+            # Initialize board randomly
+            self.resetToDefault()
+            self.randomPlaceThief()
+
+            # Initialize episode reward
+            episode_reward = 0
+
+            # Get thief piece
+            thief = next(piece for piece in self.pieces if piece.name == 'thief')
+            
+            # Get Police pieces
+            police = [piece for piece in self.pieces if piece.name == 'police']
+
+            # Get Gold piece
+            gold = [piece for piece in self.pieces if piece.name == 'gold']
+
+            for step in range(self.episode_length):
+                # Print Episode
+                self.display()
+                print(f'Step: {step}')
+                time.sleep(0.5)
+
+                # Get Observation as distance between police and gold to thief
+                observation = self.getDistanceThief()
+                
+                # Convert Observation to index for q_tables
+                obs = tuple(dist for i in observation for dist in i)
+               
+                # Choose best action from q_table) 
+                action = np.argmax(self.q_table[obs])
+                
+                # Move thief according to action
+                thief.move(action)
+                
+                # Check if thief is in the same position as gold or police
+                if any([thief==piece for piece in police]):
+                    # If thief is in the same square as police
+                    reward = self.police_reward
+
+                elif any([thief==piece for piece in gold]):
+                    # If thief is in the same square as gold
+                    reward = self.gold_reward
+
+                else:
+                    # If thief is not in the same square as police or gold, give move penalty
+                    reward = self.move_reward
+
+                # Add reward for current step to total episode reward
+                episode_reward += reward
+
+                if reward == self.gold_reward: # If thief hit police, end the episode
+                    print('G')
+                    break
+                elif reward == self.police_reward: # If thief hit gold, end the episode
+                    print('P')
+                    break
+
+                if step == self.episode_length-1: # If thief is on last move, add negative reward for not finishing
+                    reward = self.endless_reward
+                    break
+
+            print(f'Reward: {episode_reward}')
+
+
     def save(self, filename):
         np.save(filename, self.q_table)
 
@@ -253,7 +353,7 @@ class Env:
         # If filename exists, load it
         return np.load(filename)
 
-    def initializePositions(self, nPolice = 1, nThief = 1, nGold = 1):
+    def initializePositions(self):
         '''
         Randomly populates the grid with no overlap
         '''
@@ -279,7 +379,28 @@ class Env:
         populate(self, self.nThief, 'thief')
         populate(self, self.nGold, 'gold')
         populate(self, self.nPolice, 'police')
-    
+
+    def resetToDefault(self):
+        import copy
+        self.pieces = copy.deepcopy(self.default)
+
+    def randomPlaceThief(self):
+        # Remove starting thief from pieces
+        self.pieces = [piece for piece in self.pieces if piece.name != 'thief']
+
+        # Generate Random Pos for Object
+        x = np.random.randint(self.size)
+        y = np.random.randint(self.size)
+              
+        # Check if position is already occupied
+        if (x,y) in [piece.getPos() for piece in self.pieces]:
+            while (x,y) in [piece.getPos() for piece in self.pieces]: # Try until free
+                x = np.random.randint(self.size)
+                y = np.random.randint(self.size)
+                
+        # If position is accepted, add to pieces
+        self.pieces.append(Piece('thief',x,y,self.size))
+
     def getDistanceThief(self):
         '''
         Calculates the distance between thief and other pieces as observation state
@@ -294,6 +415,7 @@ class Env:
         '''
         Display current configuration of the grid
         '''
+        print()
         for x in range(self.size):
             print((2*self.size+1)*'-')
             for y in range(self.size):
@@ -309,7 +431,7 @@ class Env:
                     print(self.key.get('empty'), end='')
             print('|')
         print((2*self.size+1)*'-')
-
+        print()
 
 # Main script to run everything
 def main():
@@ -317,9 +439,10 @@ def main():
     env = Env()
     
     env.train()
-    df = pd.DataFrame(env.rewards)
-    df.to_csv('test.csv')
+    #df = pd.DataFrame(env.rewards)
+    #df.to_csv('test.csv')
 
+    env.test()
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,7 @@
 \documentclass{jfm}
 \usepackage{graphicx}
 \usepackage{epstopdf, epsfig}
+\usepackage{xcolor}
 
 \newtheorem{lemma}{Lemma}
 \newtheorem{corollary}{Corollary}
@@ -24,7 +25,7 @@
 % ABSTRACT
 %------------------------------------------------------------------------------------------------------------------
 \begin{abstract}
-Test
+ABSTRACT HERE
 \end{abstract}
 
 
@@ -40,17 +41,55 @@ Authors should not enter keywords on the manuscript, as these must be chosen by 
 % Introduction
 %------------------------------------------------------------------------------------------------------------------
 \section{Introduction}
-Reinforcement Learning (RL) is an area of machine learning where an agent learns optimal behavior through repeated interactions with an environment that maximize some notion of a cumulative reward. 
+Reinforcement Learning (RL) is a branch of machine learning where an agent learns optimal behavior through repeated interactions with an environment to maximize some notion of a cumulative reward. 
 
-Why it differs from other methods of machine learning
+\subsection{RL Model}
+\subsubsection{State}
+\subsubsection{Action}
+\subsubsection{Reward}
+\subsubsection{Model-Based vs. Model-Free}
 
-Some common applications (famous examples).
+\subsection{Markov Decision Process}
+\subsubsection{Full Markov Decision Process}
+- Discrete-time stochastic control.
 
-Challenges in designing a system
+- Future is conditionally independent of past given present $s_t$ and $a_t$.
 
-Introduction of basic concepts.
+- Probability of sampling action $a_t$ given state $s_t$.
 
-Markov decision process (MDP): 
+- Probability of transitioning to state $s_{t+1}$ given state $s_t$ and action $a_t$.
+
+- Calculation of reward based on $s_{t+1}$, $s_t$, and $a_t$.
+
+\subsubsection{Partially Observable Markov Decision Process}
+
+\subsection{Challenges}
+ \subsubsection{Exploration vs Exploitation}
+- Exploration = Gather info with possibly sub-optimal actions
+
+- Exploitation = Use current knowledge to choose best action
+
+- Short term vs long term
+
+- When to stop exploring
+
+\subsubsection{Temporal Credit Assignment Problem}
+- How "good" is an action
+
+- How does it influence the next state / end state
+
+- Which actions lead to desired state
+
+\subsubsection{State Representation}
+- Discrete State
+
+- Representative state (CNN)
+
+- Probability Distribution of states
+
+\subsection{Applications}
+
+
 
 %------------------------------------------------------------------------------------------------------------------
 % Methods
@@ -58,7 +97,7 @@ Markov decision process (MDP):
 \section{Methods}
 \subsection{Q-Learning}
 \subsubsection{Theory of Q-Learning}
-Q-Learning is a model-free RL algorithm whereby an agent learns the value of an action for a given state  by calculating the expected reward for an action taken in a given state. Originally proposed by Watkins in 1989 \cite{Watkins1989},
+Q-Learning is a model-free RL algorithm whereby an agent learns the value of an action for a given state  by calculating the expected reward for an action taken in a given state. Originally proposed by Watkins in 1989 \cite{Watkins1989}.
 
 - Works well for discretized environements (like grids)
 
@@ -68,7 +107,11 @@ Q-Learning is a model-free RL algorithm whereby an agent learns the value of an 
 
 - Exploring all states in q-learning often takes too long
 
-\subsubsection{Grid World}
+\begin{equation}
+Q^{new}(s_t,a_t) = Q(s_t,a_t) + \alpha \left(r_t +  \gamma Q(s_{t+1},a) - Q(s_t,a_t)\right)
+\end{equation}
+
+\subsubsection{Example Environment}
 - Grid like 8x8
 
 - One thief (seeking)
@@ -78,19 +121,11 @@ Q-Learning is a model-free RL algorithm whereby an agent learns the value of an 
 - Gold (Goal)
 
 
-
-\begin{equation}
-Q^{new}(s_t,a_t) = Q(s_t,a_t) + \alpha \left(r_t +  \gamma Q(s_{t+1},a) - Q(s_t,a_t)\right)
-\end{equation}
-
-
 \subsection{Deep Q-Learning}
 \subsubsection{Deep Q-Learning Theory}
 A bit better for continuous state domains
 
-
-
-\subsubsection{Environment}
+\subsubsection{Example Environment}
 \cite{Florian2007}
 
 \cite{1606.01540}
@@ -104,6 +139,11 @@ A bit better for continuous state domains
 \end{equation}
 
 
+\subsection{Double Deep Q-Learning}
+
+\subsection{Policy Gradient}
+
+\subsection{Deep Deterministic Policy Gradient}
 
 %------------------------------------------------------------------------------------------------------------------
 % Conclusions

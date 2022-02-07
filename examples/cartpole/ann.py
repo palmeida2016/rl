@@ -25,9 +25,8 @@ class ArtificialNeuralNetwork():
         layer2 = np.random.rand(self.layer1Nodes+1, self.layer2Nodes) * np.sqrt(2/self.layer1Nodes) 
         layer3 = np.random.rand(self.layer2Nodes+1, self.actionDim) * np.sqrt(2/self.layer2Nodes)
 
-        print(layer1)
-        
         # Return list of layers
+
         return (layer1, layer2, layer3)
     
     def ReLU(self,arr):
@@ -46,9 +45,6 @@ class ArtificialNeuralNetwork():
         # Get predicted q-value from neural network model
         steps, output = self.predict(state)
         
-        print('steps here\n\n')
-        [print(x) for x in steps]
-
         # Compute required update for weights
         delta = self.backPropagation(steps, output, y)
 
@@ -56,7 +52,8 @@ class ArtificialNeuralNetwork():
         '''
         Compute backpropagation in neural network to determine required deltas for each weight
         '''
-        pass
+        print('Back Propagation Start')
+
 
     def predict(self,state):
         '''
